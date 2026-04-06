@@ -1,0 +1,334 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+
+  font-family: 'Playfair Display', serif;
+  color: white;
+  text-align: center;
+
+  background: url("assets/bg.jpg") no-repeat center center fixed;
+  background-size: cover;
+
+  overflow-y: auto;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 0;
+}
+
+#lock-screen {
+  position: relative;
+  z-index: 2;
+  margin-top: 20%;
+}
+
+#main-content {
+  position: relative;
+  max-width: 500px;
+  margin: 0 auto;   /* 🔥 THIS FIXES TOP GAP */
+  padding: 20px;
+
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 20px;
+
+  backdrop-filter: blur(10px);
+}
+
+h1 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+#typewriter {
+  font-size: 1rem;
+  line-height: 1.2;
+  white-space: pre-line;
+
+  opacity: 0;
+  transition: opacity 2s ease;
+
+  text-shadow: 0 0 10px rgba(255,255,255,0.4);
+}
+
+input {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+}
+
+button {
+  padding: 12px 22px;
+  margin-top: 10px;
+  background: pink;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* ================= MEMORY PAGE ================= */
+
+.memory-body {
+  background: url("assets/bg.jpg") no-repeat center center/cover;
+  color: white;
+  overflow: hidden;
+}
+
+/* subtle glow */
+
+
+/* container (initial state) */
+#card-container {
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* cards (single focus mode) */
+.card {
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+
+  opacity: 0;
+  width: 260px;
+  background: #fff;
+  color: #000;
+  padding: 10px;
+  border-radius: 10px;
+
+  box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+  transition: opacity 1.5s ease;
+}
+
+.card.active {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* image */
+.card img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+/* next arrow */
+#next-btn {
+  position: fixed;   /* 🔥 KEY CHANGE */
+  bottom: 40px;
+  right: 50px;
+
+  font-size: 2rem;
+  cursor: pointer;
+
+  z-index: 9999;     /* 🔥 ABOVE EVERYTHING */
+
+  animation: float 1.5s infinite alternate;
+}
+
+@keyframes float {
+  from { transform: translateY(0); }
+  to { transform: translateY(-10px); }
+}
+
+/* ================= FINAL MODE ================= */
+
+/* blur */
+.blur {
+  filter: blur(8px);
+}
+
+/* FINAL LAYOUT (THIS FIXES YOUR ISSUE) */
+#card-container.final {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* override absolute positioning */
+#card-container.final .card {
+  position: relative;
+  top: auto;
+  left: auto;
+  transform: none;
+
+  opacity: 1;
+}
+
+/* slight vintage tilt */
+#card-container.final .card:nth-child(1) {
+  transform: rotate(-2deg);
+}
+#card-container.final .card:nth-child(2) {
+  transform: rotate(2deg);
+}
+#card-container.final .card:nth-child(3) {
+  transform: rotate(-1deg);
+}
+
+/* ================= FINAL MESSAGE ================= */
+
+#final-message {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  display: none;
+  opacity: 0;
+  transition: opacity 2s ease;
+
+  z-index: 100;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.letter {
+  background: rgba(0,0,0,0.85);
+  padding: 40px;
+  border-radius: 20px;
+
+  max-width: 500px;
+  width: 90%;
+
+  text-align: center;
+
+  margin: auto;
+}
+
+.letter p {
+  line-height: 1.0;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+#final-line-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  opacity: 0;
+  transition: opacity 2s ease;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: url("assets/bg.jpg") no-repeat center center fixed;
+  background-size: cover;
+
+  z-index: 200;
+}
+
+#final-line-text {
+  color: #000;                 /* 🔥 pure black */
+  font-size: 2.4rem;           /* 🔥 bigger = more impact */
+  font-weight: 700;            /* 🔥 bold */
+  letter-spacing: 1px;         /* ✨ elegant spacing */
+  line-height: 1.8;
+  text-align: center;
+  max-width: 700px;
+
+  font-family: 'Playfair Display', serif;
+
+  text-shadow: 0 4px 20px rgba(0,0,0,0.4); /* 🔥 depth */
+}
+
+#final-line-screen::before {
+  background: rgba(255,255,255,0.6);  /* 🔥 brighter */
+}
+
+#message-container p {
+  transition: opacity 1.5s ease;
+  font-family: 'Caveat', cursive;
+}
+
+.card p {
+  font-family: 'Caveat', cursive;
+  font-size: 1.1rem;
+}
+
+#lock-screen,
+#main-content,
+.memory-body,
+#final-line-screen {
+  position: relative;
+  z-index: 2;
+}
+
+/* 📱 MOBILE OPTIMIZATION */
+@media (max-width: 768px) {
+
+  /* main content */
+  #main-content {
+    width: 90%;
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  #typewriter {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  /* cards */
+  .card {
+    width: 220px;
+    padding: 8px;
+  }
+
+  .card p {
+    font-size: 1rem;
+  }
+
+  /* arrow */
+  #next-btn {
+    font-size: 1.8rem;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  /* final letter box */
+  .letter {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .letter p {
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  /* final line */
+  #final-line-text {
+    font-size: 1.8rem;
+    padding: 0 20px;
+  }
+
+}

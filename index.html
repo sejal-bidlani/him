@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You ❤️</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Caveat&family=Playfair+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Password Screen -->
+    <div id="lock-screen">
+        <h2>Enter Password 🔐</h2>
+        <input type="password" id="password">
+        <button onclick="checkPassword()">Unlock</button>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content" style="display:none;">
+        <h1>Welcome to Your World ❤️</h1>
+        <p id="typewriter"></p>
+
+        <button id="continueBtn" onclick="goNext()" style="margin-top:20px; display:none;">
+            Continue 😏
+        </button>
+    </div>
+
+    <!-- Music -->
+    <audio id="bg-music" loop>
+        <source src="assets/music.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
